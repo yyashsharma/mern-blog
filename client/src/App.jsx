@@ -6,11 +6,13 @@ import SignUp from "./pages/SignUp";
 import Projects from "./pages/Projects";
 import Dashboard from "./pages/Dashboard";
 import Header from "./components/Header";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <Router>
-      <Header/>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -19,6 +21,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/projects" element={<Projects />} />
       </Routes>
+      <ToastContainer position="top-center"/>
     </Router>
   );
 }

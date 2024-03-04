@@ -13,7 +13,7 @@ export const signup = async (req, res,next) => {
 
         const userFound = await User.findOne({ email });
         if (userFound) {
-            return res.status(400).json({ message: "user Already Exist" });
+            return res.status(400).json({ success:false,message: "User Already Exist" });
         }
 
         const hashedPassword = bcryptjs.hashSync(password, 10);
@@ -25,7 +25,7 @@ export const signup = async (req, res,next) => {
         })
         const saved = await user.save();
 
-        res.status(201).json(saved)
+        res.status(201).json({ success:true,message: "User Registered Successfully" })
 
     } catch (error) {
        next(error)
