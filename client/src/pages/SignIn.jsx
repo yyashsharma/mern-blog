@@ -8,6 +8,7 @@ import {
   signInFailure,
 } from "../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import OAuth from "../components/OAuth";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
@@ -57,7 +58,7 @@ const SignIn = () => {
         {/* left */}
         <div className="flex-1">
           <Link to={"/"} className="text-4xl font-bold dark:text-white">
-            <span className="px-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-l-full text-white">
+            <span className="px-3 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-l-full text-white">
               Yash's
             </span>
             Blog
@@ -94,6 +95,7 @@ const SignIn = () => {
             >
               {loading ? <Spinner size="sm" /> : "Sign In"}
             </Button>
+            <OAuth />
           </form>
           <div className="flex gap-2 text-sm mt-5">
             <span> Don't have an account?</span>

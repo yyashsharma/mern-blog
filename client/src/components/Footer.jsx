@@ -22,12 +22,12 @@ const FooterComponent = () => {
     <Footer container className="border border-t-8 border-teal-500 ">
       <div className="w-full">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
-          <div>
+          <div className="mb-5">
             <Link
               to={"/"}
-              className="self-center whitespace-nowrap text-lg sm:text-xl font-semibold dark:text-white"
+              className="self-center whitespace-nowrap text-xl sm:text-2xl font-semibold dark:text-white"
             >
-              <span className="px-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-l-full text-white">
+              <span className="px-3 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-l-full text-white">
                 Yash's
               </span>
               Blog

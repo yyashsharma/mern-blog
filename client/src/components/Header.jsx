@@ -14,7 +14,7 @@ const path=useLocation().pathname;
         to={"/"}
         className="self-center whitespace-nowrap text-md sm:text-xl font-semibold dark:text-white"
       >
-        <span className="px-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-l-full text-white">
+        <span className="px-3 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-l-full text-white">
           Yash's
         </span>
         Blog

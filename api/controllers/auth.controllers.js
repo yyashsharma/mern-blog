@@ -58,8 +58,49 @@ export const signin = async (req, res, next) => {
 
         res.status(200).cookie('access_token', token, {
             httpOnly: true,
-        }).json({ success: true, message: "User Logged in Successfully",rest })
+        }).json({ success: true, message: "User Logged in Successfully", rest })
 
+    } catch (error) {
+        next(error)
+    }
+}
+
+
+export const google = async (req, res, next) => {
+    try {
+        const { name, email, googlePhotoUrl } = req.body;
+
+        const validUser = await User.findOne({ email });
+        if (validUser) {
+            const token = generateToken({ validUser });
+
+            const { password, ...rest } = validUser._doc;
+
+            res.status(200).cookie('access_token', token, {
+                httpOnly: true,
+            }).json({ success: true, message: "User Logged in Successfully", rest })
+        } else {
+            const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8)
+            const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
+
+            const validUser = new User({
+                //username-Yash Sharma  , name required=>yashsharma9867
+                username: name.toLowerCase().split(' ').join('') + Math.random().toString(9).slice(-4),
+                email,
+                password: hashedPassword,
+                profilePicture: googlePhotoUrl
+            })
+            const saved = await validUser.save();
+
+            const token = generateToken({ validUser });
+
+            const { password, ...rest } = validUser._doc;
+
+            res.status(200).cookie('access_token', token, {
+                httpOnly: true,
+            }).json({ success: true, message: "User Logged in Successfully", rest })
+
+        }
     } catch (error) {
         next(error)
     }

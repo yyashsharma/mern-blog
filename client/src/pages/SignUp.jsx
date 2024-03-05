@@ -1,13 +1,14 @@
 import { Button, Label, Spinner, TextInput } from "flowbite-react";
 import React, { useState } from "react";
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import OAuth from "../components/OAuth";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +33,7 @@ const SignUp = () => {
       }
       toast.success(data.message);
       setLoading(false);
-      navigate('/sign-in')
+      navigate("/sign-in");
     } catch (error) {
       toast.error(error.message);
       setLoading(false);
@@ -49,7 +50,7 @@ const SignUp = () => {
         {/* left */}
         <div className="flex-1">
           <Link to={"/"} className="text-4xl font-bold dark:text-white">
-            <span className="px-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-l-full text-white">
+            <span className="px-3 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-l-full text-white">
               Yash's
             </span>
             Blog
@@ -95,6 +96,7 @@ const SignUp = () => {
             >
               {loading ? <Spinner size="sm" /> : "Sign Up"}
             </Button>
+            <OAuth />
           </form>
           <div className="flex gap-2 text-sm mt-5">
             <span>Have an account?</span>
