@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Header from "./components/Header";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FooterComponent from "./components/Footer";
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/projects" element={<Projects />} />
       </Routes>
-      <ToastContainer position="top-center"/>
+      <FooterComponent />
+      <ToastContainer position="top-center" />
     </Router>
   );
 }
