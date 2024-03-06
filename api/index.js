@@ -4,12 +4,14 @@ import {config} from 'dotenv'
 import userRoutes from './routes/user.route.js'
 import authRoutes from './routes/auth.route.js'
 import { ErrorHandlerMiddleware } from './middlewares/Errormiddleware.js';
+import cookieParser from 'cookie-parser';
 
 config();
 
 const app=express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 connectDb();
 
