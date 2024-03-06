@@ -6,11 +6,9 @@ import { Link, useLocation } from "react-router-dom";
 const DashSidebar = () => {
   const location = useLocation();
   const [tab, setTab] = useState("");
-  // console.log(location)
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    console.log("url", urlParams);
     const tabFromUrl = urlParams.get("tab");
     if (tabFromUrl) {
       setTab(tabFromUrl);
@@ -21,18 +19,19 @@ const DashSidebar = () => {
     <Sidebar className="w-full md:w-56">
       <Sidebar.Items>
         <Sidebar.ItemGroup>
-          <Link to={"/dashboard?tab=profile"}>
+          <Link to={"/dashboard?tab=profile"} >
             <Sidebar.Item
               active={tab === "profile"}
               icon={HiUser}
               label={"User"}
               labelColor="dark"
+              as="div"
             >
               Profile
             </Sidebar.Item>
           </Link>
 
-          <Sidebar.Item icon={HiArrowSmRight} classname="cursor-pointer">
+          <Sidebar.Item icon={HiArrowSmRight} className="cursor-pointer">
             Sign Out
           </Sidebar.Item>
         </Sidebar.ItemGroup>
