@@ -13,12 +13,15 @@ import { useState } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
   const [formData, setFormData] = useState({});
 
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
+
+  const navigate = useNavigate();
 
   const handleUpdloadImage = async () => {
     try {
@@ -53,12 +56,33 @@ const CreatePost = () => {
       setImageUploadProgress(null);
     }
   };
-  console.log(imageUploadProgress);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`/api/v1/post/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (data.success === false) {
+        return toast.error(data.message);
+      }
+      toast.success(data.message);
+      navigate(`/post/${data.savedPost.slug}`);
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
   return (
     <div className="min-h-screen p-3 max-w-3xl mx-auto">
       <h1 className="text-center text-3xl font-semibold my-7">Create a post</h1>
-      <form className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4 sm:flex-row justify-between">
           <TextInput
             type="text"
@@ -66,8 +90,15 @@ const CreatePost = () => {
             required
             id="title"
             className="flex-1"
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }
           />
-          <Select>
+          <Select
+            onChange={(e) =>
+              setFormData({ ...formData, category: e.target.value })
+            }
+          >
             <option value="uncategorized">Select a cateogory</option>
             <option value="javascript">JavaScript</option>
             <option value="reactjs">React Js</option>
@@ -111,6 +142,7 @@ const CreatePost = () => {
           placeholder="Write something here..."
           required
           className="h-72 mb-12"
+          onChange={(value) => setFormData({ ...formData, content: value })}
         />
         <Button type="submit" gradientDuoTone="purpleToPink">
           Publish
