@@ -53,6 +53,8 @@ const DashProfile = () => {
   }, [imageFile]);
 
   const uploadImage = async () => {
+    //rules of firebase storaeg
+
     // service firebase.storage {
     //   match /b/{bucket}/o {
     //     match /{allPaths=**} {
