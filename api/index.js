@@ -3,6 +3,7 @@ import { connectDb } from './utils/db.js';
 import {config} from 'dotenv'
 import userRoutes from './routes/user.route.js'
 import authRoutes from './routes/auth.route.js'
+import postRoutes from './routes/post.route.js'
 import { ErrorHandlerMiddleware } from './middlewares/Errormiddleware.js';
 import cookieParser from 'cookie-parser';
 
@@ -21,6 +22,7 @@ app.get('/',(req,res)=>{
 
 app.use('/api/v1/auth',authRoutes)
 app.use('/api/v1/user',userRoutes)
+app.use('/api/v1/post',postRoutes)
 
 //error middleware for handling errors
 app.use(ErrorHandlerMiddleware)
