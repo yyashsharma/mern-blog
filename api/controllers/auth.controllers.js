@@ -90,7 +90,7 @@ export const google = async (req, res, next) => {
                 password: hashedPassword,
                 profilePicture: googlePhotoUrl
             })
-            const saved = await validUser.save();
+             await validUser.save();
 
             const token = generateToken({ validUser });
 
