@@ -81,3 +81,43 @@ export const signout = async (req, res, next) => {
     }
 }
 
+
+export const getusers = async (req, res, next) => {
+    if (!req.user.isAdmin) {
+        return next(errorHandler(403, "You are not allowed to all users"))
+    }
+    try {
+        const startIndex = parseInt(req.query.startIndex) || 0;
+        const limit = parseInt(req.query.limit) || 9;
+        const sortDirections = req.query.order === 'asc' ? 1 : -1;
+
+        const users = await User.find()
+            .select('-password') // Exclude the 'password' field
+            .sort({ updatedAt: sortDirections })
+            .skip(startIndex)
+            .limit(limit);
+
+        const totalUsers = await User.countDocuments();
+
+        const now = new Date();
+        const oneMonthAgo = new Date(
+            now.getFullYear(),
+            now.getMonth() - 1,
+            now.getDate()
+        );
+
+        const lastMonthUsers = await User.countDocuments({
+            createdAt: { $gte: oneMonthAgo }
+        });
+
+        res.status(201).json({
+            success: true,
+            users,
+            totalUsers,
+            lastMonthUsers
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
