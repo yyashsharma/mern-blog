@@ -97,9 +97,9 @@ export const updatepost = async (req, res, next) => {
         const updatedPost = await Post.findByIdAndUpdate(req.params.postId, {
             $set: {
                 title: req.body.title,
+                content: req.body.content,
                 category: req.body.category,
                 image: req.body.image,
-                content: req.body.content
             }
         },
             { new: true });

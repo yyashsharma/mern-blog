@@ -20,10 +20,10 @@ const UpdatePost = () => {
   const { currentUser } = useSelector((state) => state.user);
 
   const [formData, setFormData] = useState({
-    title: "", // Initialize with an empty string or appropriate default value
-    category: "uncategorized", // Initialize with the default category
-    content: "", // Initialize with an empty string or appropriate default value
-    image: "", // Initialize with an empty string or appropriate default value
+    title: "",      // Initialize with an empty string
+    category: "uncategorized",  // Initialize with the default category
+    content: "",    // Initialize with an empty string
+    image: "",      // Initialize with an empty string
   });
 
   const [file, setFile] = useState(null);
@@ -32,6 +32,23 @@ const UpdatePost = () => {
   const navigate = useNavigate();
 
   const { postId } = useParams();
+
+  useEffect(() => {
+    try {
+      const fetchPost = async () => {
+        const res = await fetch(`/api/v1/post/getposts?postId=${postId}`);
+        const data = await res.json();
+        if (data.success === false) {
+          return toast.error(data.message);
+        }
+        setFormData(data.posts[0]);
+      };
+      fetchPost();
+    } catch (error) {
+      toast.error(error);
+    }
+  }, [postId]);
+
 
   const handleUpdloadImage = async () => {
     try {
@@ -57,7 +74,10 @@ const UpdatePost = () => {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setImageUploadProgress(null);
-            setFormData({ ...formData, image: downloadURL });
+            setFormData((prevData) => ({
+              ...prevData,
+              image: downloadURL,
+            }));
           });
         }
       );
@@ -92,21 +112,7 @@ const UpdatePost = () => {
     }
   };
 
-  useEffect(() => {
-    try {
-      const fetchPost = async () => {
-        const res = await fetch(`/api/v1/post/getposts?postId=${postId}`);
-        const data = await res.json();
-        if (data.success === false) {
-          return toast.error(data.message);
-        }
-        setFormData(data.posts[0]);
-      };
-      fetchPost();
-    } catch (error) {
-      toast.error(error);
-    }
-  }, [postId]);
+  console.log("form", formData);
 
   return (
     <div className="min-h-screen p-3 max-w-3xl mx-auto">
@@ -120,13 +126,19 @@ const UpdatePost = () => {
             id="title"
             className="flex-1"
             onChange={(e) =>
-              setFormData({ ...formData, title: e.target.value })
+              setFormData((prevData) => ({
+                ...prevData,
+                title: e.target.value,
+              }))
             }
             value={formData.title}
           />
           <Select
             onChange={(e) =>
-              setFormData({ ...formData, category: e.target.value })
+              setFormData((prevData) => ({
+                ...prevData,
+                category: e.target.value,
+              }))
             }
             value={formData.category}
           >
@@ -173,7 +185,7 @@ const UpdatePost = () => {
           placeholder="Write something here..."
           required
           className="h-72 mb-12"
-          onChange={(value) => setFormData({ ...formData, content: value })}
+          onChange={(value) => setFormData((prevData) => ({ ...prevData, content: value }))}
           value={formData.content}
         />
         <Button type="submit" gradientDuoTone="purpleToPink">
