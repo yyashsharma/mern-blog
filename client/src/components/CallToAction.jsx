@@ -21,8 +21,7 @@ const CallToAction = () => {
       <div className="p-7 flex-1">
         <img
           src="https://cdn.pixabay.com/photo/2022/03/15/18/06/portfolio-7070886_1280.png"
-          alt=""
-          srcset=""
+          alt="Check Out Link"
         />
       </div>
     </div>
