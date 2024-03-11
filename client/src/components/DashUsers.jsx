@@ -54,23 +54,18 @@ const DashUsers = () => {
   };
   const handleDeleteUser = async () => {
     setOpenModal(false);
-    //   try {
-    //     const res = await fetch(
-    //       `/api/v1/user/deleteuser/${userIdToDelete}/${currentUser._id}`,
-    //       {
-    //         method: `DELETE`,
-    //       }
-    //     );
-    //     const data = await res.json();
-    //     if (data.success === false) {
-    //       return toast.error(data.message);
-    //     }
-    //     setUserPosts((prev) =>
-    //       prev.filter((post) => post._id !== postIdToDelete)
-    //     );
-    //   } catch (error) {
-    //     toast.error(error);
-    //   }
+    try {
+      const res = await fetch(`/api/v1/user/delete/${userIdToDelete}`, {
+        method: `DELETE`,
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        return toast.error(data.message);
+      }
+      setUsers((prev) => prev.filter((user) => user._id !== userIdToDelete));
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   return (
