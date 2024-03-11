@@ -112,7 +112,7 @@ const UpdatePost = () => {
     }
   };
 
-  console.log("form", formData);
+  // console.log("form", formData);
 
   return (
     <div className="min-h-screen p-3 max-w-3xl mx-auto">
