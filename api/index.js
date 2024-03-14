@@ -7,8 +7,11 @@ import postRoutes from './routes/post.route.js'
 import commentRoutes from './routes/comment.route.js'
 import { ErrorHandlerMiddleware } from './middlewares/Errormiddleware.js';
 import cookieParser from 'cookie-parser';
+import path from 'path'
 
 config();
+
+const __dirname = path.resolve();
 
 const app = express();
 
@@ -25,6 +28,13 @@ app.use('/api/v1/auth', authRoutes)
 app.use('/api/v1/user', userRoutes)
 app.use('/api/v1/post', postRoutes)
 app.use('/api/v1/comment', commentRoutes)
+
+//it run the index.html file in client side
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'))
+})
 
 //error middleware for handling errors
 app.use(ErrorHandlerMiddleware)
