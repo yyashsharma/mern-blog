@@ -9,6 +9,12 @@ body{
 .ql-editor{
     font-size: 1.05rem;
 }
+.ql-syntax{
+  padding: 10px;
+  background: black;
+  color: white;
+  border-radius: 5px;
+}
 
 .post-content p {
     margin-bottom: 0.5rem;

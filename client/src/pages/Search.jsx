@@ -6,7 +6,7 @@ import PostCard from "../components/PostCard";
 const Search = () => {
   const [sidebarData, setSidebarData] = useState({
     searchTerm: "",
-    sort: "desc",
+    order: "desc",
     category: "uncategorized",
   });
 
@@ -20,13 +20,13 @@ const Search = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get("searchTerm");
-    const sortFromUrl = urlParams.get("sort");
+    const sortFromUrl = urlParams.get("order");
     const categoryFromUrl = urlParams.get("category");
     if (searchTermFromUrl || sortFromUrl || categoryFromUrl) {
       setSidebarData({
         ...sidebarData,
         searchTerm: searchTermFromUrl,
-        sort: sortFromUrl,
+        order: sortFromUrl,
         category: categoryFromUrl,
       });
     }
@@ -59,7 +59,7 @@ const Search = () => {
     }
     if (e.target.id === "sort") {
       const order = e.target.value || "desc";
-      setSidebarData({ ...sidebarData, sort: order });
+      setSidebarData({ ...sidebarData, order });
     }
     if (e.target.id === "category") {
       const category = e.target.value || "uncategorized";
@@ -71,7 +71,7 @@ const Search = () => {
     e.preventDefault();
     const urlParams = new URLSearchParams(location.search);
     urlParams.set("searchTerm", sidebarData.searchTerm);
-    urlParams.set("sort", sidebarData.sort);
+    urlParams.set("order", sidebarData.order);
     urlParams.set("category", sidebarData.category);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
@@ -116,7 +116,7 @@ const Search = () => {
           </div>
           <div className="flex items-center gap-2">
             <label className="font-semibold">Sort:</label>
-            <Select onChange={handleChange} value={sidebarData.sort} id="sort">
+            <Select onChange={handleChange} value={sidebarData.order} id="sort">
               <option value="desc">Latest</option>
               <option value="asc">Oldest</option>
             </Select>
