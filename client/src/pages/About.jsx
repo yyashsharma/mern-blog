@@ -8,8 +8,9 @@ export default function About() {
           </h1>
           <div className="text-md text-gray-500 flex flex-col gap-6">
             <p>
-              Welcome to Yash's Blog! This blog was created by Yash Sharma as a
-              personal project to share his thoughts and ideas with the world.
+              Welcome to Tech Blog! This blog was created by Yash Sharma and
+              Shubham Devgan as a College project to share his thoughts and
+              ideas with the world.
             </p>
 
             <p>

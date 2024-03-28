@@ -28,7 +28,7 @@ const FooterComponent = () => {
               className="self-center whitespace-nowrap text-xl sm:text-2xl font-semibold dark:text-white"
             >
               <span className="px-3 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-l-full text-white">
-                Yash's
+                TECH
               </span>
               Blog
             </Link>
@@ -37,15 +37,35 @@ const FooterComponent = () => {
             <div>
               <FooterTitle title="about" />
               <FooterLinkGroup col>
-                <FooterLink href="/about" target="_blank" rel="noopener noreferrer">Yash's Blog</FooterLink>
-                <FooterLink href="/about" target="_blank" rel="noopener noreferrer">Tailwind CSS</FooterLink>
+                <FooterLink
+                  href="/about"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  TECH Blog
+                </FooterLink>
+                <FooterLink
+                  href="/about"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Tailwind CSS
+                </FooterLink>
               </FooterLinkGroup>
             </div>
             <div>
               <FooterTitle title="Follow us" />
               <FooterLinkGroup col>
-                <FooterLink href="https://github.com/yashsharma001" target="_blank" rel="noopener noreferrer">Github</FooterLink>
-                <FooterLink href="#" target="_blank" rel="noopener noreferrer">Discord</FooterLink>
+                <FooterLink
+                  href="https://github.com/yashsharma001"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Github
+                </FooterLink>
+                <FooterLink href="#" target="_blank" rel="noopener noreferrer">
+                  Discord
+                </FooterLink>
               </FooterLinkGroup>
             </div>
             <div>
@@ -59,12 +79,19 @@ const FooterComponent = () => {
         </div>
         <FooterDivider />
         <div className="w-full sm:flex sm:items-center sm:justify-between">
-          <FooterCopyright href="#" by="Yash's Blog™" year={new Date().getFullYear()} />
+          <FooterCopyright
+            href="#"
+            by="TECH Blog™"
+            year={new Date().getFullYear()}
+          />
           <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
             <FooterIcon href="#" icon={BsFacebook} />
             <FooterIcon href="#" icon={BsInstagram} />
             <FooterIcon href="#" icon={BsTwitter} />
-            <FooterIcon href="https://github.com/yashsharma001" icon={BsGithub} />
+            <FooterIcon
+              href="https://github.com/yashsharma001"
+              icon={BsGithub}
+            />
             <FooterIcon href="#" icon={BsDribbble} />
           </div>
         </div>

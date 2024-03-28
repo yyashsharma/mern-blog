@@ -51,7 +51,7 @@ const SignUp = () => {
         <div className="flex-1">
           <Link to={"/"} className="text-4xl font-bold dark:text-white">
             <span className="px-3 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-l-full text-white">
-              Yash's
+              TECH
             </span>
             Blog
           </Link>
