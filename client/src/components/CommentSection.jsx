@@ -19,6 +19,9 @@ const CommentSection = ({ postId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!currentUser) {
+      toast.error("You must be signed in to comment");
+    }
     if (comment.length > 200) {
       return;
     }
@@ -151,28 +154,28 @@ const CommentSection = ({ postId }) => {
           </Link>
         </div>
       )}
-      {currentUser && (
-        <form
-          onSubmit={handleSubmit}
-          className="border border-teal-500 rounded-md p-3"
-        >
-          <Textarea
-            placeholder="Add a comment..."
-            rows="3"
-            maxLength="200"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-          <div className="flex justify-between mt-5 items-center">
-            <p className="text-gray-500 text-xs">
-              {200 - comment.length} characters remaining
-            </p>
-            <Button type="submit" outline gradientDuoTone="purpleToBlue">
-              Submit
-            </Button>
-          </div>
-        </form>
-      )}
+
+      <form
+        onSubmit={handleSubmit}
+        className="border border-teal-500 rounded-md p-3"
+      >
+        <Textarea
+          placeholder="Add a comment..."
+          rows="3"
+          maxLength="200"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
+        <div className="flex justify-between mt-5 items-center">
+          <p className="text-gray-500 text-xs">
+            {200 - comment.length} characters remaining
+          </p>
+          <Button type="submit" outline gradientDuoTone="purpleToBlue">
+            Submit
+          </Button>
+        </div>
+      </form>
+
       {comments.length === 0 ? (
         <p className="text-gray-500 text-sm my-5">No comments yet!</p>
       ) : (
