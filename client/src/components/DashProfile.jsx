@@ -250,7 +250,7 @@ const DashProfile = () => {
         >
           {loading ? <Spinner size="sm" /> : "Update"}
         </Button>
-        {currentUser.isAdmin && (
+        {currentUser && (
           <Link to={"/create-post"}>
             <Button
               type="button"

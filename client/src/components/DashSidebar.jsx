@@ -75,6 +75,17 @@ const DashSidebar = () => {
               Profile
             </Sidebar.Item>
           </Link>
+          {currentUser && currentUser.isAdmin && (
+            <Link to={"/dashboard?tab=approval"}>
+              <Sidebar.Item
+                active={tab === "approval" || !tab}
+                icon={HiChartPie}
+                as="div"
+              >
+                Approval 
+              </Sidebar.Item>
+            </Link>
+          )}
           {currentUser.isAdmin && (
             <Link to={"/dashboard?tab=posts"}>
               <Sidebar.Item

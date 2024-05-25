@@ -2,7 +2,7 @@ import { Post } from "../models/post.model.js"
 import { errorHandler } from "../utils/error.js"
 
 export const create = async (req, res, next) => {
-    if (!req.user.isAdmin) {
+    if (!req.user) {
         return next(errorHandler(403, 'You are not allowed to create a post'))
     }
 
@@ -16,10 +16,12 @@ export const create = async (req, res, next) => {
         .toLowerCase()
         .replace(/[^a-zA-Z0-9-]/g, '');
 
+       
     const newPost = new Post({
         ...req.body,
         slug,
         userId: req.user.id,
+        approved:req.user.isAdmin?true:false,
     })
     try {
         const savedPost = await newPost.save();
@@ -34,7 +36,7 @@ export const getposts = async (req, res, next) => {
         const startIndex = parseInt(req.query.startIndex) || 0;
         const limit = parseInt(req.query.limit) || 9;
         const sortDirections = req.query.order === 'asc' ? 1 : -1;
-
+       
         const posts = await Post.find({
             ...(req.query.userId && { userId: req.query.userId }),
             ...(req.query.category && { category: req.query.category }),
@@ -46,6 +48,7 @@ export const getposts = async (req, res, next) => {
                     { content: { $regex: req.query.searchTerm, $options: 'i' } },
                 ]
             }),
+            approved: true
         })
             .sort({ updatedAt: sortDirections })
             .skip(startIndex)
@@ -89,6 +92,7 @@ export const deletepost = async (req, res, next) => {
     }
 
 }
+
 export const updatepost = async (req, res, next) => {
     if (!req.user.isAdmin || req.user.id !== req.params.userId) {
         return next(errorHandler(403, 'You are not allowed to update this post'))
@@ -104,6 +108,41 @@ export const updatepost = async (req, res, next) => {
         },
             { new: true });
         res.status(200).json({ success: true, message: "Post has been updated successfully", updatedPost });
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const getApprovalPosts = async (req, res, next) => {
+    if (!req.user.isAdmin) {
+        return next(errorHandler(403, 'You are not allowed to see approval post'))
+    }
+
+    try {
+        const posts = await Post.find({approved:false});
+
+        res.status(201).json({
+            success: true,
+            posts,
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+export const updateApproval = async (req, res, next) => {
+    if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+        return next(errorHandler(403, 'You are not allowed to approved this post'))
+    }
+    try {
+        const approvedPost = await Post.findByIdAndUpdate(req.params.postId, {
+            $set: {
+                approved:true
+            }
+        },
+            { new: true });
+        res.status(200).json({ success: true, message: "Post has been approved successfully", approvedPost });
     } catch (error) {
         next(error)
     }

@@ -14,8 +14,10 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const CreatePost = () => {
+  const { currentUser } = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
 
   const [file, setFile] = useState(null);
@@ -72,8 +74,8 @@ const CreatePost = () => {
       if (data.success === false) {
         return toast.error(data.message);
       }
-      toast.success(data.message);
-      navigate(`/post/${data.savedPost.slug}`);
+     currentUser.isAdmin?toast.success(data.message):toast.success("Post Created Successfully.Sent for approval.Once approved, displayed on our website and you will get notified through mail");
+      data.savedPost.approved?navigate(`/post/${data.savedPost.slug}`):navigate(`/`);
     } catch (error) {
       toast.error(error);
     }
