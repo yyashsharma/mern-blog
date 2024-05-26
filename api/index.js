@@ -5,9 +5,11 @@ import userRoutes from './routes/user.route.js'
 import authRoutes from './routes/auth.route.js'
 import postRoutes from './routes/post.route.js'
 import commentRoutes from './routes/comment.route.js'
+import mailRoutes from './routes/mail.route.js'
 import { ErrorHandlerMiddleware } from './middlewares/Errormiddleware.js';
 import cookieParser from 'cookie-parser';
 import path from 'path'
+
 
 config();
 
@@ -28,6 +30,8 @@ app.use('/api/v1/auth', authRoutes)
 app.use('/api/v1/user', userRoutes)
 app.use('/api/v1/post', postRoutes)
 app.use('/api/v1/comment', commentRoutes)
+app.use('/api/v1',mailRoutes)
+
 
 //it run the index.html file in client side
 app.use(express.static(path.join(__dirname, '/client/dist')));
@@ -38,6 +42,7 @@ app.get('*', (req, res) => {
 
 //error middleware for handling errors
 app.use(ErrorHandlerMiddleware)
+
 
 app.listen(process.env.PORT, () => {
     console.log("server is running on 4000!")

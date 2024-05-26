@@ -119,7 +119,10 @@ export const getApprovalPosts = async (req, res, next) => {
     }
 
     try {
-        const posts = await Post.find({approved:false});
+        const posts = await Post.find({
+            ...(req.query.postId && { _id: req.query.postId }),
+            approved: false
+        });
 
         res.status(201).json({
             success: true,
