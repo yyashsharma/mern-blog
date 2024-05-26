@@ -107,7 +107,7 @@ const UpdateApprovedPost = () => {
           return toast.error(data.message);
         }
         toast.success(data.message);
-        navigate(`/post/${data.updatedPost.slug}`);
+        navigate(`/dashboard?tab=approval`);
       } catch (error) {
         toast.error(error);
       }

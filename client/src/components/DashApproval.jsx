@@ -136,21 +136,18 @@ const DashApproval = () => {
                   {new Date(post.createdAt).toLocaleDateString()}
                 </Table.Cell>
                 <Table.Cell>
-                  <Link to={`/post/${post.slug}`}>
+                
                     <img
                       src={post.image}
                       alt={post.title}
                       className="w-20 h-10 object-cover bg-gray-300"
                     />
-                  </Link>
+                 
                 </Table.Cell>
                 <Table.Cell>
-                  <Link
-                    className="font-medium text-gray-900 dark:text-white"
-                    to={`/post/${post.slug}`}
-                  >
+                 
                     {post.title}
-                  </Link>
+                 
                 </Table.Cell>
                 <Table.Cell>{post.category}</Table.Cell>
                 <Table.Cell>
@@ -239,7 +236,7 @@ const DashApproval = () => {
         <div className="text-center">
           <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
           <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-            Are you sure you want to approved this post?
+          "Are you sure you want to approve this post?"
           </h3>
           <div className="flex justify-center gap-4">
             <Button color="failure" onClick={handleApprovedPost}>
