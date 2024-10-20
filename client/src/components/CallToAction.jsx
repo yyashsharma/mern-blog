@@ -13,9 +13,12 @@ const CallToAction = () => {
         <Button gradientDuoTone="purpleToPink"
         className="rounded-tl-xl rounded-bl-none
         rounded-br-xl rounded-tr-none">
-          <a className="hover:underline" href="https://portfolio-topaz-iota.vercel.app/" target="_blank" rel="noopener noreferrer">
+          {/* <a className="hover:underline" href="https://portfolio-topaz-iota.vercel.app/" target="_blank" rel="noopener noreferrer">
             Visit portfolio
-          </a>
+          </a> */}
+          <a className="hover:underline" href="https://drive.google.com/file/d/1qE0nRmfdPjVpE8JDbywRwsuDegchz55r/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+            Visit portfolio
+          </a> 
         </Button>
       </div>
       <div className="p-7 flex-1">

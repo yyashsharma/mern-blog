@@ -57,7 +57,7 @@ const FooterComponent = () => {
               <FooterTitle title="Follow us" />
               <FooterLinkGroup col>
                 <FooterLink
-                  href="https://github.com/yashsharma001"
+                  href="#"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -89,7 +89,7 @@ const FooterComponent = () => {
             <FooterIcon href="#" icon={BsInstagram} />
             <FooterIcon href="#" icon={BsTwitter} />
             <FooterIcon
-              href="https://github.com/yashsharma001"
+              href="#"
               icon={BsGithub}
             />
             <FooterIcon href="#" icon={BsDribbble} />
