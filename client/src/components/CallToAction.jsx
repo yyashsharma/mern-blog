@@ -16,7 +16,7 @@ const CallToAction = () => {
           {/* <a className="hover:underline" href="https://portfolio-topaz-iota.vercel.app/" target="_blank" rel="noopener noreferrer">
             Visit portfolio
           </a> */}
-          <a className="hover:underline" href="https://drive.google.com/file/d/1qE0nRmfdPjVpE8JDbywRwsuDegchz55r/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+          <a className="hover:underline" href="https://drive.google.com/file/d/1zYdmPxjmA0YyjnEJ9ECRZgZHUW5Tbbut/view?usp=sharing" target="_blank" rel="noopener noreferrer">
             Visit portfolio
           </a> 
         </Button>
